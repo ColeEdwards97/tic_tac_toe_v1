@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html>
+
+<!-- head -->
+<head>
+	<title>Tic-Tac-Toe</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}"  />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/game.css') }}"  />
+	<script type="text/javascript" src="{{ url_for('static', filename='js/ajax_requests.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/update.js') }}"></script>
+</head>
+
+<!-- body -->
+<body>
+	
+	<form action="/game" method="post">
+	
+		<table>
+			<caption>Tic-Tac-Toe</caption>
+			
+			{% for j in range(0, 3) %}
+			<tr>
+				{% for i in range(0, 3) %}
+				<td class="board">
+					<button type="button" class="board" id="{{ j*3+i }}" name="board" onclick="tile_click(this.id);"></button>
+				</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		
+		</table>	
+
+		<p id="msg"></p>
+		
+		<!--
+		<table id="scores">
+			<tr id="names"></tr>
+			<tr id="wins"></tr>
+		</table>
+		-->
+		
+		<button type="button" class="reset" id="reset" name="reset" onclick="reset_board();">Reset</button>
+	
+	</form>
+	
+	{% for ttt in stream %}
+		{% for x in range(0, 9) %}
+		<script>update_tile("{{x}}", "{{ttt.board[x]}}");</script>
+		{% endfor %}
+	<script>update_board("{{ttt.game_over}}", "{{ttt.msg}}");</script>
+	<!--<script>update_score("{{ ttt.can_player_join() }}", "{{ttt.players}}");</script>-->
+	{% endfor %}
+	
+</body>
+
+
+</html>

@@ -1,0 +1,17 @@
+td.board {
+	width: 50px;
+	height: 50px;
+	border: 2px inset;
+	text-align: center;
+}
+
+button.board {
+	width: 48px;
+	height: 48px;
+}
+button.board.x {
+	color: red;
+}
+button.board.o {
+	color: blue;
+}
